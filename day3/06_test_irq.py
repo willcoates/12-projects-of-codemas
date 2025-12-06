@@ -14,9 +14,12 @@ button2 = Pin(8, Pin.IN, Pin.PULL_DOWN)
 button3 = Pin(3, Pin.IN, Pin.PULL_DOWN)
 
 def debounce(period_ms = 200):
+    """
+    Debounces a function, ignoring future calls until period_ms has passed.
+    """
     def decorator(fn):
         last_invoke = time.ticks_add(time.ticks_ms(), -period_ms)
-        
+
         def wrapper(*args, **kwargs):
             nonlocal last_invoke
             now = time.ticks_ms()
